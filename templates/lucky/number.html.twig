@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{# templates/lucky/number.html.twig #}
+
+{% import 'macros/alertes.html.twig' as utils %}
+
+  {% block body %}
+        <h1>Your lucky number is {{ number }}</h1>
+      {% set somePrice = 10.7567 %}
+
+      <p> {{ somePrice|price(2) }} </p>
+       {# "10.75€" #}
+      <p> {{ lipsum() }}</p>
+
+      {# Use macro #}
+      {{ utils.alert('Attention!', 'warning') }}
+      {{ utils.alert('Erreur fatale!', 'danger') }}
+      {{ utils.alert('Soukaina fatale!', 'danger') }}
+      {# Use macro #}
+  {% endblock %}
