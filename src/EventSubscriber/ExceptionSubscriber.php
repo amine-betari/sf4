@@ -9,29 +9,42 @@
 namespace App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use App\Events\FooEvent;
-use App\Events\BarEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class ExceptionSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
         // Liste des évènements, méthodes et priorités
-        return [
-            'foo' => [
-                ['doSomething', 10],
-                ['doOtherThing', 0],
-            ],
-            'bar' => [
-                ['doBarThing', -10]
-            ],
-        ];
+        return array(
+            KernelEvents::EXCEPTION => array(
+                array('processException', 12),
+                array('logException', 11),
+                array('notifyException', 1),
+            )
+        );
     }
 
-    public function doSomething(FooEvent $event) {}
+    public function processException(GetResponseForExceptionEvent $event)
+    {
+        // ...
+        dump('1');
+        dump($event);
+        $event->stopPropagation();
+    }
 
-    public function doOtherThing(FooEvent $event) {}
+    public function logException(GetResponseForExceptionEvent $event)
+    {
+        // ...
+        dump('2');
+        dump($event);
+    }
 
-    public function doBarThing(BarEvent $event) {}
+    public function notifyException(GetResponseForExceptionEvent $event)
+    {
+        // ...
+        dump('3');
+        dump($event);
+    }
 }

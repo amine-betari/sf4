@@ -8,17 +8,24 @@
 
 namespace App\Services;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
+
 class MailLogger
 {
     private $adminEmail;
 
-    public function __construct($adminEmail)
+    private $params;
+
+    public function __construct($adminEmail, ContainerBagInterface $params)
     {
         $this->adminEmail = $adminEmail;
+        $this->params     = $params;
     }
 
     public function sendMail()
     {
         /* ... */
+        dump($this->params->all());
+
     }
 }
