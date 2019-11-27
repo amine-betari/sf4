@@ -11,7 +11,9 @@ return function (RoutingConfigurator $routes) {
 
     $routes->add('blog_index2', '/index/{page?1989}')
         ->controller([BlogController::class, 'index2'])
-        ->methods(['GET'])
+        ->methods(['GET']);
 
-    ;
+     /*$routes->add('api_foo', '/api/foo')
+        ->controller([\App\Controller\FooController::class, 'foo']);*/
+
 };

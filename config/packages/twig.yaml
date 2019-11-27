@@ -5,3 +5,6 @@ twig:
     form_themes: ['bootstrap_4_layout.html.twig'] # accepte plusieurs thèmes
 
     exception_controller: App\Controller\CustomExceptionController::showAction
+
+    globals:
+        ga_traking: '%ga_tracking%'

@@ -12,6 +12,7 @@ use Some\LipsumGenerator;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use App\Twig\AppRuntime;
 
 class AppExtension extends AbstractExtension
 {
@@ -23,6 +24,8 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFilter('price', [$this, 'filterPrice']),
+            // the logic of this filter is now implemented in a different class
+            new TwigFilter('price2', array(AppRuntime::class, 'priceFilter')),
         ];
     }
 

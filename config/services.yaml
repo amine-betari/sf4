@@ -3,9 +3,24 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+imports:
+    - { resource: 'services.php'}
+    - { resource: 'legacy.php' }
+#    - { resource: '/etc/sites/mysite.com/parameters.yaml', ignore_errors: true }
 parameters:
     admin_email: 'amine.betari@gmail.com'
     brochures_directory: '%kernel.project_dir%/public/uploads/brochures'
+    tokens:
+       client1: pass1
+       client2: pass2
+    ga_tracking: UA-xxxxx-x
+
+   # binary content parameters (encode the contents with base64_encode())
+    app.some_parameter: !!binary VGhpcyBpcyBhIEJlbGwgY2hhciAH
+
+    # PHP constants as parameter values
+#    app.some_constant: !php/const GLOBAL_CONSTANT
+#    app.another_constant: !php/const App\Entity\BlogPost::MAX_ITEMS
 
 services:
     # default configuration for services in *this* file

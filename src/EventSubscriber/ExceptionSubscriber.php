@@ -31,7 +31,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
         // ...
         dump('1');
         dump($event);
-        $event->stopPropagation();
+        //$event->stopPropagation();
     }
 
     public function logException(GetResponseForExceptionEvent $event)

@@ -60,8 +60,12 @@ class FormController extends AbstractController
             );
             // $this->addFlash() is equivalent to $request->getSession()->getFlashBag()->add()
         } else {
-            dump('not valid or not submitted ');
+
         }
+
+        // Twig
+        $format = $request->getRequestFormat();
+        dump($format);
 
         return $this->render('default/new.html.twig', array(
             'articleForm' => $form->createView(),
