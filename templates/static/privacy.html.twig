@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
-    <h2>Static content</h2>
+{% block body %}
+    <h2>Static content {{ num }}</h2>
+   {# {{ render_esi(controller('App\\Controller\\NewsController::latest', { 'maxPerPage': 5 })) }} #}
+    {{ render_esi(url('mco')) }}
 {% endblock %}

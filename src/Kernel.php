@@ -8,8 +8,14 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
-class Kernel extends BaseKernel
+use App\DependencyInjection\Compiler\MailTransportPass;
+
+//require dirname(__DIR__).'/vendor/autoload.php';
+// require __DIR__.'/vendor/autoload.php';
+
+class Kernel extends BaseKernel implements CompilerPassInterface
 {
     use MicroKernelTrait;
 
@@ -49,5 +55,29 @@ class Kernel extends BaseKernel
         $routes->import($confDir.'/{routes}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
+    }
+
+    // If you don't implements CompilerPassInterface
+    public function build(ContainerBuilder $container): void
+    {
+       // $container->addCompilerPass(new Services\TwitterClient());
+        $container->addCompilerPass(new MailTransportPass());
+
+       /* $container->registerForAutoconfiguration(CustomInterface::class)
+            ->addTag('app.custom_tag')
+        ;*/
+    }
+
+    public function process(ContainerBuilder $container)
+    {
+        // in this method you can manipulate the service container:
+        // for example, changing some container service:
+        $container->getDefinition('App\Util\Rot13Transformer')->setPublic(true);
+
+        // or processing tagged services:
+        foreach ($container->findTaggedServiceIds('kernel.event_listener') as $id => $tags) {
+            // ...
+            dump($id);
+        }
     }
 }

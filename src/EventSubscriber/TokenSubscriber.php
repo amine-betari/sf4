@@ -47,7 +47,7 @@ class TokenSubscriber implements EventSubscriberInterface
         if (!is_array($controller)) {
             return;
         }
-        dump($controller);
+       // dump($controller);
 
         if ($controller[0] instanceof TokenAuthenticatedController) {
             dump($event->getRequest());

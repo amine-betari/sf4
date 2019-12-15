@@ -84,6 +84,7 @@ class FormController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setUpdated(new \DateTime());
             // va effectuer la requête d'UPDATE en base de données
             $this->getDoctrine()->getManager()->flush();
         }

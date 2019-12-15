@@ -14,4 +14,16 @@
 
 ###> phpstorm ###
 /.idea/
+.idea/
+.idea/*
 ###< phpstorm ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/cs ###
+.php_cs.cache
+###< symfony/cs ###

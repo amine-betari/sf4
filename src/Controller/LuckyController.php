@@ -21,6 +21,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use App\Events\BasketProductAdded;
 use App\Services\MailLogger;
+use App\Services\MessageGenerator;
+use App\Services\TwitterClient;
+
 
 class LuckyController extends AbstractController
 {
@@ -82,9 +85,19 @@ class LuckyController extends AbstractController
         // $service1 = $this->container->get(MailLogger::class);
 
         $service2 = $this->mailLogger;
-        dump($service2->sendMail());
+       // dump($service2->sendMail());
+        $number = random_int(1, 11);
 
-        return new Response("VIVE MCO vs BERCHID ".$number );
+        $response = new Response("VIVE MCO vs BERCHID  ".$number);
+
+        /*$date = new \DateTime();
+        $date->modify('+60 seconds');
+        $response->setExpires($date);*/
+
+        $response->setSharedMaxAge(60);
+
+
+        return $response;
     }
 
     public function add(EventDispatcherInterface $eventDispatcher)
@@ -92,6 +105,37 @@ class LuckyController extends AbstractController
         /* ... */
         $event = new BasketProductAdded($product, $this->getUser());
         $eventDispatcher->dispatch(BasketProductAdded::NAME, $event);
+    }
+
+    /**
+     * @Route("/new", name="new")
+     */
+    public function new(MessageGenerator $messageGenerator)
+    {
+        // thanks to the type-hint, the container will instantiate a
+        // new MessageGenerator and pass it to you!
+        // ...
+        // dump($this->container->get('App\Services\MessageGenerator'));
+        dump($this->get('app.message'));
+        $message = $messageGenerator->getHappyMessage();
+        $this->addFlash('success', $message);
+        // ...
+        return new Response('NEW PATHH');
+    }
+
+    /**
+     * @Route("/tweet")
+     */
+    public function tweet(TwitterClient $twitterClient)
+    {
+        // fetch $user, $key, $status from the POST'ed data
+
+    //    $twitterClient = $this->container->get(TwitterClient::class);
+        dump($twitterClient);
+        die;
+        $twitterClient->tweet($user, $key, $status);
+
+        // ...
     }
 
 

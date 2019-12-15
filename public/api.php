@@ -1,7 +1,6 @@
 <?php
 
-use App\CacheKernel;
-use App\Kernel;
+use App\ApiKernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,14 +20,10 @@ if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? $_ENV['TRUSTED_HOSTS'] ?? false
     Request::setTrustedHosts([$trustedHosts]);
 }
 
-$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
-
-
-// Wrap the default Kernel with the CacheKernel one in 'prod' environment
-if ('dev' === $_SERVER['APP_ENV']) {
-    $kernel = new CacheKernel($kernel);
-}
-
+$kernel = new ApiKernel(
+    $_SERVER['APP_ENV'] ?? 'dev',
+    $_SERVER['APP_DEBUG'] ?? ('prod' !== ($_SERVER['APP_ENV'] ?? 'dev'))
+);
 
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);

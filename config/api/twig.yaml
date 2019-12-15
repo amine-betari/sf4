@@ -1,0 +1,4 @@
+twig:
+    paths:
+        # allows to use api/templates/ dir in the ApiKernel
+        "%kernel.project_dir%/api/templates": ~

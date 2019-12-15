@@ -64,3 +64,106 @@ services:
         public: true
         arguments:
             $debug: '%kernel.debug%'
+
+    App\Services\MessageGenerator:
+        public: false
+        arguments:
+            $logger1: "monolog.logger.request"
+            #$logger1: "@monolog.logger.request"
+# a revoir, thqt's not working
+    app.message:
+        alias: App\Services\MessageGenerator
+        public: true
+## Anonymous Services
+    App\Foo:
+        arguments:
+            - !service
+                class: App\AnonymousBar
+    App\Foo2:
+        factory: [ !service { class: App\FooFactory }, 'constructFoo' ]
+
+#deprecated services
+    App\Services\OldService:
+        deprecated: The "%service_id%" service is deprecated since 2.8 and will be removed in 3.0.
+
+# alias and interface
+
+    #app.rot13.transformer:
+    #    class: App\Util\Rot13Transformer
+
+    App\Services\TwitterClient:
+        # redundant thanks to _defaults, but value is overridable on each service
+        autowire: true
+        # If you wanted to choose the non-default service, wire it manually
+        arguments:
+            $transformer: '@App\Util\UppercaseTransformer'
+        # ...
+
+    #App\Util\Rot13Transformer: '@app.rot13.transformer'
+    App\Util\Rot13Transformer: ~
+    App\Util\UppercaseTransformer: ~
+    # the ``App\Util\Rot13Transformer`` service will be injected when
+    # an ``App\Util\TransformerInterface`` type-hint is detected
+    App\Util\TransformerInterface: '@App\Util\Rot13Transformer'
+
+    App\Email\NewsletterManager:
+        # call the static method
+        factory: ['App\Email\NewsletterManagerStaticFactory', createNewsletterManager]
+
+    App\Repository\BaseDoctrineRepository:
+        abstract:  true
+        arguments: ['@doctrine.orm.entity_manager']
+        calls:
+            - [setLogger, ['@logger']]
+#parent service
+#    App\Repository\DoctrineUserRepository:
+#        # extend the App\Repository\BaseDoctrineRepository service
+#        parent: App\Repository\BaseDoctrineRepository
+#        autowire: true
+#        autoconfigure: true
+#        # overrides the public setting of the parent service
+#        public: false
+#
+#        # appends the '@app.username_checker' argument to the parent
+#        # argument list
+#        arguments: ['@app.username_checker']
+#
+#    App\Repository\DoctrinePostRepository:
+#        parent: App\Repository\BaseDoctrineRepository
+#        autowire: true
+#        autoconfigure: true
+#
+#        # overrides the first argument (using the special index_N key)
+#        arguments:
+#            index_0: '@doctrine.custom_entity_manager'
+
+#decorate service
+    App\Mailer: ~
+
+    # this replaces the old App\Mailer definition with the new one, the
+    # old definition is lost
+#    App\Mailer:
+#        class: App\DecoratingMailer
+
+    App\DecoratingMailer:
+        # overrides the App\Mailer service
+        # but that service is still available as App\DecoratingMailer.inner
+        decorates: App\Mailer
+
+        # pass the old service as an argument
+        arguments: ['@App\DecoratingMailer.inner']
+
+        # private, because usually you do not need to fetch App\DecoratingMailer directly
+        public:    false
+
+#tags
+#    Swift_SmtpTransport:
+#        arguments: ['%mailer_host%']
+#        tags: ['app.mail_transport']
+#        tags:
+#            - { name: 'app.mail_transport', alias: 'smtp' }
+
+#    Swift_SendmailTransport:
+#        tags: ['app.mail_transport']
+#        tags:
+#            - { name: 'app.mail_transport', alias: 'sendmail' }
