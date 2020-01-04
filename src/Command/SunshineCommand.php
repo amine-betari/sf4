@@ -46,13 +46,13 @@ class SunshineCommand extends Command
         $this
           //  ->setName('app:sunshine')
             ->setHidden(false)
-            ->setDescription('Good morning!')
-            ->addArgument('name', InputArgument::REQUIRED, 'Who do you want to greet?')
-            ->addArgument('last_name', InputArgument::REQUIRED, 'Your last name ?')
-            ->addArgument('names', InputArgument::IS_ARRAY | InputArgument::REQUIRED, 'Who do you want to greet (separate multiple names with a space)?');
+            ->setDescription('Good morning!');
+          //  ->addArgument('name', InputArgument::REQUIRED, 'Who do you want to greet?')
+          //  ->addArgument('last_name', InputArgument::REQUIRED, 'Your last name ?')
+          //  ->addArgument('names', InputArgument::IS_ARRAY | InputArgument::REQUIRED, 'Who do you want to greet (separate multiple names with a space)?');
         $this
             // ...
-            ->addOption('iterations','i',InputOption::VALUE_REQUIRED,'How many times should the message be printed?',1);
+            ->addOption('iterations','i',InputOption::VALUE_REQUIRED,'How many times should the message be printed?', null);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -72,8 +72,8 @@ class SunshineCommand extends Command
         // automatically when the execution of the command ends
         $this->release();
 
-
-        $text = 'Hi '.$input->getArgument('name');
+        $text = 'Hi ';
+    /*    $text = 'Hi '.$input->getArgument('name');
 
         $lastName = $input->getArgument('last_name');
         if ($lastName) {
@@ -84,8 +84,9 @@ class SunshineCommand extends Command
         if (count($names) > 0) {
             $text .= ' '.implode(', ', $names);
         }
+    */
 
-        $output->writeln($text.'!');
+        $output->writeln($text.'! en dehors de la boucle ');
 
         for ($i = 0; $i < $input->getOption('iterations'); $i++) {
             $output->writeln($text);

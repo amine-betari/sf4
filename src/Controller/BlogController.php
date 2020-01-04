@@ -158,6 +158,12 @@ class BlogController extends AbstractController
      */
     public function homepage(Request $request)
     {
+        dump($request);
+        dump($request->attributes->get("_route"));
+        dump($request->getPathInfo());
+        dump($request->getRequestUri());
+        dump($request->getUri());
+        die;
         $num = random_int(1000, 2000);
         $response = $this->render('static/homepage.html.twig', [
         //    "num" => $num,

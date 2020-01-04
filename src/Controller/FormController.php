@@ -15,6 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Form\ArticleType;
 use App\Entity\Article;
+use App\Entity\Task;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use App\Services\FileUploader;
 
@@ -22,7 +27,7 @@ class FormController extends AbstractController
 {
 
     /**
-     * @Route("/form/new")
+     * @Route("/form/new", name="article")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -93,4 +98,42 @@ class FormController extends AbstractController
             'articleForm' => $form->createView(),
         ));
     }
-}
+
+    /**
+     * @Route("/form/task", name="task")
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function newTask(Request $request)
+    {
+        // creates a task and gives it some dummy data for this example
+        $task = new Task();
+        $task->setTask('Write a blog post');
+        $task->setDueDate(new \DateTime('tomorrow'));
+
+        $form = $this->createFormBuilder($task)
+            ->add('task', null, array('label' => 'Nour', 'attr' => array('maxlength' => 4)))
+            ->add('dueDate', DateType::class,  array('widget' => 'single_text'))
+            ->add('agreeTerms', CheckboxType::class, array('mapped' => false))
+            ->add('save', SubmitType::class, array('label' => 'Create Task'))
+            ->setAction($this->generateUrl('task'))
+            ->setMethod('GET')
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            $task = $form->getData();
+            dump($form->get('agreeTerms')->getData());
+            dump($form->get('task')->getData());
+            die;
+            return $this->redirectToRoute('article');
+
+        }
+
+        return $this->render('forms/new.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }}

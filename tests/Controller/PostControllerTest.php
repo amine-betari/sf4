@@ -10,6 +10,7 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Entity\Cart;
 
 class PostControllerTest extends WebTestCase
 {
@@ -116,6 +117,15 @@ class PostControllerTest extends WebTestCase
             'environment' => 'my_test_env',
             'debug'       => false,
         )); */
+    }
+
+    public function testSum()
+    {
+        $cart = new Cart();
+        $this->assertIsObject($cart);
+
+        $this->assertEquals(10, $cart->add(5,5));
+        $this->assertEquals(10, $cart->sum(5,5));
     }
 
 

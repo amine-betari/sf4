@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Objet représentant un panier d'achats.
  * @ORM\Entity()
  */
-class Cart
+final class Cart
 {
     /**
      * @ORM\Id()
@@ -37,5 +37,27 @@ class Cart
     public function __construct()
     {
         $this->products = new ArrayCollection();
+    }
+
+    /**
+     * @param $a
+     * @param $b
+     * @return mixed
+     *
+     * @deprecated
+     */
+    public function add($a, $b)
+    {
+
+       // die;
+        @trigger_error(sprintf('The %s method is deprecated si,ce version 2.8 and will be removed in version 3.0'));
+
+        return Cart::sum($a, $b);
+    }
+
+    public function sum($a, $b)
+    {
+        return $a+$b;
+
     }
 }

@@ -2,6 +2,7 @@
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Debug\Debug;
 
 require dirname(__DIR__). '/vendor/autoload.php';
 
@@ -15,4 +16,5 @@ if (in_array($path, array('', '/'))) {
 } else {
     $response = new Response('Page not found.', Response::HTTP_NOT_FOUND);
 }
+Debug::enable();
 $response->send();

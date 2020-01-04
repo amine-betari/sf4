@@ -59,7 +59,7 @@ class CreateUserCommand extends Command
         );
 
         $greetInput = new ArrayInput($arguments);
-        $returnCode = $command->run($greetInput, $output);
+  //      $returnCode = $command->run($greetInput, $output);
         // RUN Commands
         // outputs multiple lines to the console (adding "\n" at the end of each line)
         $output->writeln([
