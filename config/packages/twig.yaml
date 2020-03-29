@@ -2,7 +2,7 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-    form_themes: ['bootstrap_4_layout.html.twig'] # accepte plusieurs thèmes
+    form_themes: ['bootstrap_4_layout.html.twig', 'forms/fields.html.twig'] # accepte plusieurs thèmes
 
     exception_controller: App\Controller\CustomExceptionController::showAction
 

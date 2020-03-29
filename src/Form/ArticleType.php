@@ -43,7 +43,9 @@ class ArticleType extends AbstractType
                         ],
                         'mimeTypesMessage' => 'Please upload a valid PDF document'
                     ])
-                ]
+                ],
+                // Extension Form Type
+                'pdf_property' => 'brochureFilename',
             ])
         ;
     }

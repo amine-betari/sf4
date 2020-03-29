@@ -29,16 +29,7 @@ class AppExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @return array|TwigFunction[]
-     */
-    public function getFunctions()
-    {
-        return [
-            // appellera la fonction LipsumGenerator:generate()
-            new TwigFunction('lipsum', [$this, 'generate']),
-        ];
-    }
+
 
     /**
      * @param $number

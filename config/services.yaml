@@ -167,3 +167,14 @@ services:
 #        tags: ['app.mail_transport']
 #        tags:
 #            - { name: 'app.mail_transport', alias: 'sendmail' }
+
+    App\Form\Extension\ImageTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
+
+    App\Printing\JsonFormatter:
+#        arguments:
+#            $format: 'json'
+        tags:
+            - { name: 'printing.formatter', format: "json" }
+    App\Printing\Printer: ~

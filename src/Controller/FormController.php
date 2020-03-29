@@ -14,12 +14,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Form\ArticleType;
+use App\Form\TaskType;
 use App\Entity\Article;
 use App\Entity\Task;
+use App\Form\Type\ShippingType;
+
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\CallbackTransformer;
 
 use App\Services\FileUploader;
 
@@ -112,14 +116,7 @@ class FormController extends AbstractController
         $task->setTask('Write a blog post');
         $task->setDueDate(new \DateTime('tomorrow'));
 
-        $form = $this->createFormBuilder($task)
-            ->add('task', null, array('label' => 'Nour', 'attr' => array('maxlength' => 4)))
-            ->add('dueDate', DateType::class,  array('widget' => 'single_text'))
-            ->add('agreeTerms', CheckboxType::class, array('mapped' => false))
-            ->add('save', SubmitType::class, array('label' => 'Create Task'))
-            ->setAction($this->generateUrl('task'))
-            ->setMethod('GET')
-            ->getForm();
+        $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
 
@@ -128,6 +125,7 @@ class FormController extends AbstractController
             $task = $form->getData();
             dump($form->get('agreeTerms')->getData());
             dump($form->get('task')->getData());
+            dump($form->get('tags')->getData());
             die;
             return $this->redirectToRoute('article');
 

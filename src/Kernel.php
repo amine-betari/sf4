@@ -11,6 +11,7 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 use App\DependencyInjection\Compiler\MailTransportPass;
+use App\DependencyInjection\Compiler\PrintingCompilerPass;
 
 //require dirname(__DIR__).'/vendor/autoload.php';
 // require __DIR__.'/vendor/autoload.php';
@@ -60,8 +61,9 @@ class Kernel extends BaseKernel implements CompilerPassInterface
     // If you don't implements CompilerPassInterface
     public function build(ContainerBuilder $container): void
     {
-       // $container->addCompilerPass(new Services\TwitterClient());
         $container->addCompilerPass(new MailTransportPass());
+
+        $container->addCompilerPass(new PrintingCompilerPass());
 
        /* $container->registerForAutoconfiguration(CustomInterface::class)
             ->addTag('app.custom_tag')
@@ -72,12 +74,12 @@ class Kernel extends BaseKernel implements CompilerPassInterface
     {
         // in this method you can manipulate the service container:
         // for example, changing some container service:
-        $container->getDefinition('App\Util\Rot13Transformer')->setPublic(true);
+      /*  $container->getDefinition('App\Util\Rot13Transformer')->setPublic(true);
 
-        // or processing tagged services:
         foreach ($container->findTaggedServiceIds('kernel.event_listener') as $id => $tags) {
             // ...
             dump($id);
         }
+      */
     }
 }

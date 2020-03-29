@@ -16,6 +16,7 @@ class Task
 {
     protected $task;
     protected $dueDate;
+    protected $tags;
 
     public function getTask()
     {
@@ -40,17 +41,23 @@ class Task
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('task', new NotBlank());
-
         $metadata->addPropertyConstraint('dueDate', new NotBlank());
-        $metadata->addPropertyConstraint(
-            'dueDate',
-            new Type(\DateTime::class)
-        );
+        $metadata->addPropertyConstraint('dueDate', new Type(\DateTime::class));
     }
 
-    /*public function __get($name)
+    /**
+     * @return mixed
+     */
+    public function getTags()
     {
-        // TODO: Implement __get() method.
-        dump("nour");
-    }*/
+        return $this->tags;
+    }
+
+    /**
+     * @param mixed $tags
+     */
+    public function setTags($tags): void
+    {
+        $this->tags = $tags;
+    }
 }
