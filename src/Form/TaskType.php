@@ -96,6 +96,7 @@ class TaskType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Task::class,
+//            'validation_groups' => new GroupSequence(['First', 'Second']),
         ]);
     }
 }

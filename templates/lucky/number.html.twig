@@ -9,7 +9,8 @@
 
       <p> {{ somePrice|price(2) }} </p>
        {# "10.75€" #}
-      <p> {{ lipsum() }}</p>
+      {% set color = "blue" %}
+      The {{ color }} car!
 
       {# Use macro #}
       {{ utils.alert('Attention!', 'warning') }}

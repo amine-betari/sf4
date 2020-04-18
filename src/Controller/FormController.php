@@ -44,6 +44,7 @@ class FormController extends AbstractController
         $article->setDate(new \DateTime());
         $article->setCreated(new \DateTime());
 
+
         $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);

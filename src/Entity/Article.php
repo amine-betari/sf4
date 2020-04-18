@@ -59,6 +59,14 @@ class Article
      */
     public $date;
 
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag")
+     * @ORM\JoinTable(name="article_tags")
+     */
+    private $tags;
+
     public function getAuthor()
     {
         return $this->author;
@@ -151,4 +159,22 @@ class Article
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param mixed $tags
+     */
+    public function setTags($tags): void
+    {
+        $this->tags = $tags;
+    }
+
+
 }

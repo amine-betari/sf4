@@ -19,6 +19,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FieType;
 use Symfony\Component\Validator\Constraints\File;
 
+use  App\Form\Type\TagType;
+
 class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -47,6 +49,10 @@ class ArticleType extends AbstractType
                 // Extension Form Type
                 'pdf_property' => 'brochureFilename',
             ])
+
+            ->add('tags', TagType::class, [
+                'mapped' => true,
+            ]);
         ;
     }
 

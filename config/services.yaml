@@ -178,3 +178,8 @@ services:
         tags:
             - { name: 'printing.formatter', format: "json" }
     App\Printing\Printer: ~
+
+    App\Form\DataTransformer\TagModelTransformer:
+        public: false
+    App\Form\DataTransformer\TagViewTransformer:
+        public: false
