@@ -11,6 +11,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -158,12 +159,7 @@ class BlogController extends AbstractController
      */
     public function homepage(Request $request)
     {
-        dump($request);
-        dump($request->attributes->get("_route"));
-        dump($request->getPathInfo());
-        dump($request->getRequestUri());
-        dump($request->getUri());
-        die;
+
         $num = random_int(1000, 2000);
         $response = $this->render('static/homepage.html.twig', [
         //    "num" => $num,
@@ -173,6 +169,7 @@ class BlogController extends AbstractController
         // The isNotModified() method compares the If-None-Match header with the ETag response header.
         // If the two match, the method automatically sets the Response status code to 304.
         $response->isNotModified($request);
+
 
         return $response;
     }

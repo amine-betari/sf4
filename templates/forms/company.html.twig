@@ -1,0 +1,30 @@
+{# templates/default/new.html.twig #}
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                {{ form_start(form, {
+                    'attr': {
+                        'novalidate': 'novalidate',
+                        'class': 'col-lg-5'
+                    }
+                })
+                }}
+
+                {{ form_row(form.name) }}
+                {{ form_row(form.website) }}
+                {{ form_row(form.location) }}
+
+
+
+                {{ form_row(form.save) }}
+                {# Renders the end tag of the form and any fields that have not yet been rendered,
+                in case you rendered each field yourself. This is useful for rendering hidden fields #}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </body>
+</html>

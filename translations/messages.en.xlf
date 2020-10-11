@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="0jg4sef" resname="Symfony is great">
+        <source>Symfony is great</source>
+        <target>J'aime Symfony file en.yml</target>
+      </trans-unit>
+      <trans-unit id="SzX5ua9" resname="Hello %name%">
+        <source>Hello %name%</source>
+        <target>Bonjour %name%</target>
+      </trans-unit>
+      <trans-unit id="3EeXE2W" resname="Hurry up %name%! There is one apple left.">
+        <source>Hurry up %name%! There is one apple left.</source>
+        <target>WALD %name% Hounak Tofaha 3ala al yassare</target>
+      </trans-unit>
+      <trans-unit id="LsWj8ML" resname="Hello ">
+        <source>Hello </source>
+        <target>__Hello </target>
+      </trans-unit>
+      <trans-unit id="_HgPjEG" resname="Hello %name% %lastname%">
+        <source>Hello %name% %lastname%</source>
+        <target>__Hello %name% %lastname%</target>
+      </trans-unit>
+      <trans-unit id="xmqjTCu" resname="There is one apple|There are %count% apples">
+        <source>There is one apple|There are %count% apples</source>
+        <target>__There is one apple|There are %count% apples</target>
+      </trans-unit>
+      <trans-unit id="BBZibyr" resname="Hurry up %name%! There is %count% apple left.|There are %count% apples left.">
+        <source>Hurry up %name%! There is %count% apple left.|There are %count% apples left.</source>
+        <target>__Hurry up %name%! There is %count% apple left.|There are %count% apples left.</target>
+      </trans-unit>
+      <trans-unit id="Iqg9Hbb" resname="{0} There are no apples|{1} There is one apple|]1,19] There are %count% apples|[20,Inf[ There are many apples">
+        <source>{0} There are no apples|{1} There is one apple|]1,19] There are %count% apples|[20,Inf[ There are many apples</source>
+        <target>__{0} There are no apples|{1} There is one apple|]1,19] There are %count% apples|[20,Inf[ There are many apples</target>
+      </trans-unit>
+      <trans-unit id="3.U0KDF" resname="{0} There are no apples|[20,Inf[ There are many apples|There is one apple|a_few: There are %count% apples">
+        <source>{0} There are no apples|[20,Inf[ There are many apples|There is one apple|a_few: There are %count% apples</source>
+        <target>__{0} There are no apples|[20,Inf[ There are many apples|There is one apple|a_few: There are %count% apples</target>
+      </trans-unit>
+      <trans-unit id="rQOq4S2" resname="Hello %name% &lt;br/&gt;&#10;          Percent: %percent% %% &lt;br/&gt;">
+        <source>Hello %name% &lt;br/&gt;
+          Percent: %percent% %% &lt;br/&gt;</source>
+        <target><![CDATA[__Hello %name% <br/>
+          Percent: %percent% %% <br/>]]></target>
+      </trans-unit>
+      <trans-unit id="p.dzzg0" resname="{0} There are no apples|{1} There is one apple|]1,Inf[ There are %count% apples">
+        <source>{0} There are no apples|{1} There is one apple|]1,Inf[ There are %count% apples</source>
+        <target>__{0} There are no apples|{1} There is one apple|]1,Inf[ There are %count% apples</target>
+      </trans-unit>
+      <trans-unit id="a8Wgiqx" resname="&lt;h3&gt;foo&lt;/h3&gt;">
+        <source>&lt;h3&gt;foo&lt;/h3&gt;</source>
+        <target><![CDATA[__<h3>foo</h3>]]></target>
+      </trans-unit>
+      <trans-unit id="biU6ukk" resname="&lt;h3&gt;bar&lt;/h3&gt;">
+        <source>&lt;h3&gt;bar&lt;/h3&gt;</source>
+        <target><![CDATA[__<h3>bar</h3>]]></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

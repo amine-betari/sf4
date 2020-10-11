@@ -14,3 +14,7 @@ acme_privacy:
         template: static/privacy.html.twig
         maxAge:    86400
         sharedAge: 86400
+
+login:
+    path:       /login
+    controller: App\Controller\SecurityController::login

@@ -19,9 +19,9 @@ class ExceptionSubscriber implements EventSubscriberInterface
         // Liste des évènements, méthodes et priorités
         return array(
             KernelEvents::EXCEPTION => array(
-                array('processException', 12),
+                array('processException', 11),
                 array('logException', 11),
-                array('notifyException', 1),
+                array('notifyException', 12),
             )
         );
     }
@@ -29,22 +29,22 @@ class ExceptionSubscriber implements EventSubscriberInterface
     public function processException(GetResponseForExceptionEvent $event)
     {
         // ...
-       /* dump('1');
-        dump($event); */
+      //  dump('1');
+      //  dump($event);
         //$event->stopPropagation();
     }
 
     public function logException(GetResponseForExceptionEvent $event)
     {
         // ...
-       /* dump('2');
-        dump($event); */
+      //  dump('2');
+      //  dump($event);
     }
 
     public function notifyException(GetResponseForExceptionEvent $event)
     {
         // ...
-        /* dump('3');
-        dump($event); */
+       // dump('3');
+       // dump($event);
     }
 }

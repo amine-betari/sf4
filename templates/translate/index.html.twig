@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+  {% block body %}
+      {% trans %}
+          Hello %name% <br/>
+          Percent: %percent% %% <br/>
+      {% endtrans %}
+
+      {% transchoice count %}
+          {0} There are no apples|{1} There is one apple|]1,Inf[ There are %count% apples
+      {% endtranschoice %}
+      <br/> <br/>
+
+        <h3>You can also specify the message domain and pass some additional variables:</h3>
+      {% trans with {'%name%': 'Fabien'} from 'app' %}Hello %name%{% endtrans %}
+
+      {% trans with {'%name%': 'Fabien'} from 'messages' into 'fr' %}Hello %name%{% endtrans %}
+
+      {% transchoice count with {'%name%': 'Fabien'} from 'app' %}
+          {0} %name%, there are no apples|{1} %name%, there is one apple|]1,Inf[ %name%, there are %count% apples
+      {% endtranschoice %}
+
+      <h3>The trans and transchoice filters can be used to translate variable texts and complex expressions:</h3>
+
+      {{ name|trans }}
+
+      {{ name|transchoice(5) }}
+
+      {{ name|trans({'%name%': 'Fabien'}, 'app') }}
+
+      {{ name|transchoice(5, {'%name%': 'Fabien'}, 'app') }}
+
+
+      {% trans %}
+          <h3>foo</h3>
+      {% endtrans %}
+
+      {% set message = '<h3>foo</h3>' %}
+
+      {# strings and variables translated via a filter are escaped by default #}
+      {{ message|trans|raw }}
+      {{ '<h3>bar</h3>'|trans|raw }}
+  {% endblock %}

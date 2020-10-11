@@ -17,4 +17,25 @@
       {{ utils.alert('Erreur fatale!', 'danger') }}
       {{ utils.alert('Soukaina fatale!', 'danger') }}
       {# Use macro #}
+
+
+
+      <h2>TEST twig dump</h2>
+      {{ dump(color) }} <br />
+
+      {{ '  I like A.  '|trim }}
+
+      {# outputs 'I like Twig.' #}
+
+      {{ '  I like B. '|trim('.') }}
+
+      {# outputs '  I like Twig' #}
+
+      {{ '  I like C.  '|trim(side='left') }}
+
+      {# outputs 'I like Twig.  ' #}
+
+      {{ '  I like D.  '|trim(side='right') }}
+
+      {# outputs '  I like Twig.' #}
   {% endblock %}

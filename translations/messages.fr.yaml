@@ -1,0 +1,4 @@
+Symfony is great: J'aime Symfony file fr.yaml
+Hello %name% %lastname%:  Bonjour %name% %lastname%
+There is one apple|There are %count% apples: Il y a %count% pomme|Il y a %count% pommes
+Hurry up %name%! There is one apple left.|There are %count% apples left.: Salam %name% hounaka toufaha 3la al yassare| Hounak %count% 3la YASSAR

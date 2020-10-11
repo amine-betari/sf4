@@ -53,6 +53,8 @@ class LuckyController extends AbstractController
 
     public function number(LoggerInterface $logger)
     {
+        dump($this->get('app.message'));
+        die;
         dump($this->mailLogger);
         dump($this->adminEmail);
         dump($logger);

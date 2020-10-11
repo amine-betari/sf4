@@ -41,8 +41,32 @@ class CreateUserCommandTest extends KernelTestCase
 
         // the output of the command in the console
         $output = $commandTester->getDisplay();
-        $this->assertContains('username: Wouter', $output);
+     //   $this->assertContains('username: Wouter', $output);
 
         // ...
+
+
+        $this->sum(5,5);
+
+     //   $this->add(5,5);
+    }
+
+
+    public function sum($a, $b)
+    {
+        $this->assertEquals(10, $a+$b);
+        self::add($a, $b);
+    }
+
+
+    /**
+     * @deprecated  this functions is deprecated
+     * @param $a
+     * @param $b
+     */
+    public function add($a, $b)
+    {
+        $this->assertEquals(10, $a+$b);
+
     }
 }

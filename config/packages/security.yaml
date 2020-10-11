@@ -1,23 +1,90 @@
 security:
+    encoders:
+        App\Entity\User1:
+            algorithm: auto
+        Symfony\Component\Security\Core\User\User: plaintext
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        in_memory:
+            memory:
+                users:
+                    ryan:
+                        password: ryanpass
+                        roles: 'ROLE_USER'
+                    admin:
+                        password: kitten
+                        roles: 'ROLE_ADMIN'
+
+        app_user_provider:
+            entity:
+                class: App\Entity\User1
+                property: email
+
+        api_key_user_provider:
+            id: App\Security\ApiKeyUserProvider
+
+        guard_user_provier:
+            entity:
+                class: App\Entity\User
+                property: email
+
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
-            provider: users_in_memory
+            http_basic: ~
+            anonymous: ~
+
+            #provider: app_user_provider
+            provider: in_memory
+            # if you're using multiple entity managers
+            # manager_name: customer
+
+            logout:
+                path:   app_logout
+
+            form_login:
+                login_path: login
+                check_path: login
+
+            switch_user: { role: ROLE_ADMIN, parameter: _want_to_be_this_user }
+            guard:
+                authenticators:
+                    - App\Security\TokenAuthenticator
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
+        api:
+            pattern: ^/api
+            stateless: true
+            simple_preauth:
+                authenticator: App\Security\ApiKeyAuthenticator
+            provider: api_key_user_provider
+
+        json:
+            provider: api_key_user_provider
+            anonymous: ~
+            json_login:
+                check_path : /login
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        #-  { path: ^/, roles: ROLE_ADMIN }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+      #  - { path: '^/form/task', roles: ROLE_ADMIN }
+      #  - { path: ^/api, roles: ROLE_API }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+      #  - { path: ^/home, roles: ROLE_USER }
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]

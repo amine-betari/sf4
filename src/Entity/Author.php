@@ -59,7 +59,7 @@ class Author
      */
     public function isPasswordSafe()
     {
-        return $this->getFirstName() !== "BETARIs";
+        return $this->getFirstName() !== "BE";
 
     }
 

@@ -50,9 +50,9 @@ class ArticleType extends AbstractType
                 'pdf_property' => 'brochureFilename',
             ])
 
-            ->add('tags', TagType::class, [
+           /* ->add('tags', TagType::class, [
                 'mapped' => true,
-            ]);
+            ]);*/
         ;
     }
 

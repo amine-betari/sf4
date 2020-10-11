@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
  */
-class Customer
+class Company
 {
     /**
      * @ORM\Id()
@@ -19,12 +19,12 @@ class Customer
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $firstName;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $lastName;
+    private $website;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -51,35 +51,29 @@ class Customer
         return $this->id;
     }
 
-    public function getFirstName(): ?string
+    public function getName(): ?string
     {
-        return $this->firstName;
+        return $this->name;
     }
 
-    public function setFirstName(?string $firstName): self
+    public function setName(?string $name): self
     {
-        $this->firstName = $firstName;
+        $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLastName()
+    public function getWebsite(): ?string
     {
-        return $this->lastName;
+        return $this->website;
     }
 
-    /**
-     * @param mixed $lastName
-     */
-    public function setLastName($lastName): void
+    public function setWebsite(?string $website): self
     {
-        $this->lastName = $lastName;
+        $this->website = $website;
+
+        return $this;
     }
-
-
 
     public function getAddress(): ?string
     {

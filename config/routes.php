@@ -15,5 +15,6 @@ return function (RoutingConfigurator $routes) {
 
      /*$routes->add('api_foo', '/api/foo')
         ->controller([\App\Controller\FooController::class, 'foo']);*/
-
+    $routes->add('app_logout', '/logout')
+        ->methods(['GET']);
 };
