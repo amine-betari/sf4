@@ -6,23 +6,53 @@
     <body>
         <div class="container">
             <div class="row">
+                {# renders all fields *and* the form start and end tags #}
+                {# {{ form(form) }} #}
+
+
+                {# renders all fields #}
+                {# {{ form_widget(form) }} #}
+
+
+
                 {{ form_start(form, {
                     'attr': {
                         'novalidate': 'novalidate',
                         'class': 'col-lg-5'
-                    }
+                    },
+                    'method': 'GET'
                 })
                 }}
 
+                {{ form_errors(form) }}
+
+
                 {{ form_row(form.task) }}
+
                 {{ form_row(form.dueDate) }}
+
                 {{ form_row(form.agreeTerms) }}
+
                 {{ form_row(form.shipping_code) }}
+
                 {{ form_row(form.tags) }}
 
                 {{ form_row(form.description) }}
-                {{ form_row(form.issue) }}
-                {{ form_row(form.issue2) }}
+                {{ dump(form.description.vars.id) }}
+                {{ dump(form.description.vars.full_name) }}
+                {{ dump(form.description.vars.name) }}
+
+                {{ form_row(form.issue, { 'label': 'Field Issue' }) }}
+
+                {#{{ form_row(form.issue2) }}#}
+                {#{{ form_label(form.issue2, 'Custom Label') }}#}
+                {{ form_label(form.issue2, 'Custom Label', {'label_attr': {'class': 'foo'}}) }}
+                {{ form_errors(form.issue2) }}
+                {{ form_widget(form.issue2, {'help': 'foobar', 'attr': {'class': 'style'}}) }}
+
+
+
+                {{ dump(form.vars.value) }}
 
 
                 {{ form_row(form.save) }}

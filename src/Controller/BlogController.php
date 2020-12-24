@@ -23,6 +23,39 @@ use App\Entity\Article;
 
 class BlogController extends AbstractController
 {
+
+    public function thread(Request $request)
+    {
+        dump('THREAD');
+        dump($request->getUri());
+        dump($request->query->all());
+        return new Response('THREAD');
+    }
+
+    public function event(Request $request, $date)
+    {
+        dump($date);
+        die;
+    }
+
+    /**
+     * @Route("/blog/articles", name="blog_articles")
+     */
+    public function listArticles(int $page)
+    {
+        dd('Prépa');
+    }
+
+
+    /**
+     * @Route("/article/{id}", name="article", requirements={"id":"\d+"}, defaults={"id":"toto"})
+     */
+    public function articleAction($id)
+    {
+        return new Response($id);
+    }
+
+
     /**
      * @Route("/blog/{page}",
      *     name="blog_list",
@@ -30,14 +63,16 @@ class BlogController extends AbstractController
      *     requirements={"page"="\d+"}
      * )
      */
-    public function list(int $page = 1)
+    /*public function list(int $page = 1, \App\DataCollector\RequestCollector $test, \App\Services\Anael $anael)
     {
-       return new Response('List Blog '.$page);
-    }
+        return new Response('List Blog '.$page);
+    }*/
 
     /**
      * @Route("/blog/{slug}",
-     *     name="blog_show"
+     *     name="blog_show",
+     *     requirements={"slug":"\d+"},
+     *     defaults={"slug":"toto"}
      * )
      */
     public function show(string $slug, SessionInterface $session)
@@ -177,11 +212,14 @@ class BlogController extends AbstractController
     /**
      * @Route("/validation/{id<\d+>}", name="validation")
      */
-    public function showvalidation(Article $article, Request $request)
+    public function showvalidation(Request $request)
     {
-        $author = $article->getAuthor();
-        $articleDate = new \DateTime($article->getUpdated()->format("Y/m/d"));
+            // $author = $article->getAuthor();
+            // $articleDate = new \DateTime($article->getUpdated()->format("Y/m/d"));
        // $authorDate = new \DateTime($author->getUpdatedAt());
+
+        $articleDate = new \DateTime();
+
 
         $date = $articleDate;
 

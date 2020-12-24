@@ -8,6 +8,8 @@
 
 namespace App\Model;
 
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 
 class Person
 {
@@ -57,6 +59,19 @@ class Person
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    public function validate(ExecutionContextInterface $context, $payload)
+    {
+        // somehow you have an array of "fake names"
+        $fakeNames = array(/* ... */);
+
+        // check if the name is actually a fake name
+        if (in_array($this->getFirstName(), $fakeNames)) {
+            $context->buildViolation('This name sounds totally fake!')
+                ->atPath('firstName')
+                ->addViolation();
+        }
     }
 
 }

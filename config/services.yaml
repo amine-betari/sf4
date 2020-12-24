@@ -83,7 +83,7 @@ services:
         factory: [ !service { class: App\FooFactory }, 'constructFoo' ]
 
 #deprecated services
-    App\Services\OldService:
+    App\Services\Anael:
         deprecated: The "%service_id%" service is deprecated since 2.8 and will be removed in 3.0.
 
 # alias and interface

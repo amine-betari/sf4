@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\GroupSequenceProviderInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
+ * @Assert\GroupSequenceProvider
  */
-class Customer
+class Customer implements GroupSequenceProviderInterface
 {
     /**
      * @ORM\Id()
@@ -127,5 +130,31 @@ class Customer
         $this->country = $country;
 
         return $this;
+    }
+
+
+    /**
+     * @Assert\NotBlank(groups={"foo"}, message = "Groupe Foo attribute foo")
+     */
+    public $foo;
+
+    /**
+     * @Assert\NotBlank(groups={"foo"}, message = "Groupe Foo attribute foo2")
+     */
+    public $foo2;
+
+    /**
+     * @Assert\NotBlank(groups={"Product"}, message = "Groupe Product attribute bar")
+     */
+    public $bar;
+
+    /**
+     * @Assert\NotBlank(groups={"Amine"}, message = "Groupe nothing attribute bar2")
+     */
+    public $bar2;
+
+    public function getGroupSequence(): array
+    {
+        return [['foo', 'Product']];
     }
 }

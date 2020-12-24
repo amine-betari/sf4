@@ -39,7 +39,7 @@ class TagModelTransformer implements DataTransformerInterface
         // Convert ArrayCollextion to simple array()
     }
 
-        public function reverseTransform($value)
+    public function reverseTransform($value)
     {
         // TODO: Implement reverseTransform() method.
         // inverse

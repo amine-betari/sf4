@@ -27,11 +27,12 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            // ...
-            ->booleanNode('logging')->defaultValue($this->debug)->end()
-            // ...
+                ->booleanNode('logging')
+                    ->defaultValue($this->debug)
+                ->end()
             ->end()
-        ;
+
+         ;
 
         return $treeBuilder;
     }

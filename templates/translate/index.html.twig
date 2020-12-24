@@ -6,7 +6,7 @@
       {% endtrans %}
 
       {% transchoice count %}
-          {0} There are no apples|{1} There is one apple|]1,Inf[ There are %count% apples
+          {0} There are no apples|{1} There is one apple|]1,+Inf[ There are %count% apples
       {% endtranschoice %}
       <br/> <br/>
 
@@ -14,6 +14,8 @@
       {% trans with {'%name%': 'Fabien'} from 'app' %}Hello %name%{% endtrans %}
 
       {% trans with {'%name%': 'Fabien'} from 'messages' into 'fr' %}Hello %name%{% endtrans %}
+      <br />
+      <br />
 
       {% transchoice count with {'%name%': 'Fabien'} from 'app' %}
           {0} %name%, there are no apples|{1} %name%, there is one apple|]1,Inf[ %name%, there are %count% apples
@@ -39,4 +41,7 @@
       {# strings and variables translated via a filter are escaped by default #}
       {{ message|trans|raw }}
       {{ '<h3>bar</h3>'|trans|raw }}
+
+
+      {{ dump(data) }}
   {% endblock %}

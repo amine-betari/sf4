@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
+ * @Assert\GroupSequence({"registration", "Company"})
  */
 class Company
 {
@@ -122,4 +124,34 @@ class Company
 
         return $this;
     }
+
+    /**
+     * @Assert\Email(groups={"registration"})
+     * @Assert\NotBlank(groups={"registration"}, message = "vvv $email")
+     */
+    public $email;
+
+    /**
+     * @Assert\NotBlank(groups={"registration"})
+     * @Assert\Length(min=7, groups={"registration"})
+     */
+    public $password;
+
+    /**
+     * @Assert\Length(min=2)
+     * @Assert\NotBlank(message = "vvv $city2")
+     */
+    public $city2;
+
+    /**
+     * @Assert\NotBlank(message = "userName not vide")
+     */
+    public $username;
+
+    /**
+     * @Assert\Length(min=2)
+     * @Assert\NotBlank(message = "PAssword not vide")
+     */
+    public $passwordA;
+
 }

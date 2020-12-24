@@ -96,7 +96,7 @@ class SunshineCommand extends Command
         $context = $this->router->getContext();
         $context->setHost('example.com');
         $context->setScheme('https');
-        $context->setBaseUrl('my/path');
+//        $context->setBaseUrl('my/path');
 
         $url = $this->router->generate('blog_list', array('param-name' => 'param-value'));
         $output->writeln($url);

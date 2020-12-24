@@ -21,4 +21,14 @@ class CalculatorTest extends TestCase
         // assert that your calculator added the numbers correctly!
         $this->assertEquals(42, $result);
     }
+
+
+    public function testSome()
+    {
+        $calculator = new Calculator();
+        $result = $calculator->some(30, 12);
+
+        // assert that your calculator added the numbers correctly!
+        $this->assertEquals(32, $result);
+    }
 }

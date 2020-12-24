@@ -48,8 +48,9 @@ class CachingController extends AbstractController
 
         dump($this->get('session')->getFlashBag()->get("nom"));
         dump($request->getSession()->getFlashBag()->get("prenom"));
-        dump($this->getf->getFlashBag()->get("surnom"));
-        die;
+        dump($request->getSession()->getFlashBag()->get("surnom"));
+     //   dump($this->container->getFlashBag()->get("surnom"));
+      //  die;
 
         // create a new item by trying to get it from the cache
         $item = $this->cache->getItem('stats.products_count');

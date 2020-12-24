@@ -5,11 +5,30 @@
         https://symfony.com/schema/routing/routing-1.0.xsd">
 
     <!-- the controller value has the format 'controller_class::method_name' -->
-    <route id="blog_new" path="/new"
+    <route id="blog_new"
+           path="/new"
            controller="App\Controller\BlogController::new"
            methods="GET|HEAD" />
 
     <!-- if the action is implemented as the __invoke() method of the
          controller class, you can skip the '::method_name' part:
          controller="App\Controller\BlogController"/> -->
+
+
+    <route id="forum_thread"
+           path="/category/{slug}/thread-{id}.html"
+           host="127.0.0.1"
+           methods="GET"
+           controller="App\Controller\BlogController::thread">
+    </route>
+
+
+    <route id="app_agenda_event" path="
+" methods="GET"
+           controller="App\Controller\BlogController::event">
+        <requirement key="date">(?:20\d{2})-(?:(0?[1-9]|1[1-2]))-(?:(0?|[1-2])\d|3[0-1])</requirement>
+    </route>
+
+
 </routes>
+

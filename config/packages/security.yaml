@@ -50,6 +50,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                #user_referer: true => You can change where the login form redirects after a successful login using the various config options. In case no previous URL was stored in the session, you may wish to try using the HTTP_REFERER instead. Which security.yml parameter allows you to use the Referer HTTP header?
 
             switch_user: { role: ROLE_ADMIN, parameter: _want_to_be_this_user }
             guard:

@@ -12,6 +12,17 @@ class Calculator
 {
     public function add($a, $b)
     {
-        return $a + $b;
+        return self::some($a, $b);
+    }
+
+    /**
+     * @deprecated
+     * @param $a
+     * @param $b
+     * @return mixed
+     */
+    public function some($a, $b)
+    {
+        return $a+$b;
     }
 }
