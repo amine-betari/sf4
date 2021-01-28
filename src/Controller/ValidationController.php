@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -37,10 +38,13 @@ class ValidationController extends AbstractController
 {
 
     /**
-     *   @Route("/expression", name="expression")
+     *   @Route("/expression", name="expression", schemes="https")
      */
-    public function expression()
+    public function expression(Request $request)
     {
+        $value = $request->query->getAlpha('code', 'UNKNOWN');
+        dd($value);
+
         $expressionLanguage = new ExpressionLanguage();
 
         dump($expressionLanguage->evaluate('1 + 2')); // displays 3
@@ -81,10 +85,8 @@ class ValidationController extends AbstractController
                 'everything' => 22,
             )
         );
-
         dump($ret2);
         die;
-
     }
 
 
@@ -121,7 +123,7 @@ class ValidationController extends AbstractController
         }
 
         dump('validate is NotBlank');
-        $expectedTrue = ![]; // meaning not equal to a blank string, a blank array, null or false
+        $expectedTrue = "0"; // meaning not equal to a blank string, a blank array, null or false
 
         $validator = Validation::createValidator();
         $violations = $validator->validate($expectedTrue, [new NotBlank()]);

@@ -153,8 +153,109 @@ class Customer implements GroupSequenceProviderInterface
      */
     public $bar2;
 
+
+    /**
+     * Basic Usage
+     * @Assert\NotBlank(groups={"Range"}, message = "Groupe Age attribute age")
+     * @Assert\Range(
+     *      min = 18,
+     *      minMessage = "You must be at least {{ limit }} years to pass this formulaire",
+     *      invalidMessage = "Belfrakhi 3nadedk fo9 18 ?",
+     *      groups={"Range"}
+     * )
+     */
+    public $age;
+
+    /**
+     * Date Ranges ===> This constraint can be used to compare DateTime objects against date ranges. The minimum and maximum date of the range should be given as any date string accepted by the DateTime constructor.
+     * @Assert\Range(
+     *      min = "now",
+     *      max = "+5 hours",
+     *      groups={"Range"}
+     * )
+     */
+    public $deliveryDate;
+
+    /**
+     * @Assert\DateTime(groups={"Range"})
+     */
+    public $startDate;
+
+    /**
+     * @Assert\DateTime(groups={"Range"})
+     * @Assert\Expression(
+     *     "this.endDate > this.startDate",
+     *      message="Date start doit etre inférieure que la date de fin",
+     *      groups={"Range"}
+     * )
+     * @Assert\GreaterThan(propertyPath="startDate")
+     */
+    public $endDate;
+
+
+
+
+    /**
+     * /^\w+/",
+     * @Assert\Regex(
+     *     "/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number",
+     *     groups={"Regex"}
+     * )
+     */
+    public $description;
+
+
+    private $category;
+
+    /**
+     * @Assert\Expression(
+     *     "this.getCategory() in ['php', 'symfony'] or value == false",
+     *      message="If this is a tech post, the category should be either php or symfony!",
+     *      groups={"Regex"}
+     * )
+     */
+    private $isTechnicalPost;
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsTechnicalPost()
+    {
+        return $this->isTechnicalPost;
+    }
+
+    /**
+     * @param mixed $isTechnicalPost
+     */
+    public function setIsTechnicalPost($isTechnicalPost): void
+    {
+        $this->isTechnicalPost = $isTechnicalPost;
+    }
+
+
+
+
+
     public function getGroupSequence(): array
     {
-        return [['foo', 'Product']];
+        return [['foo', 'Product'], ['Range', 'Regex']];
     }
 }

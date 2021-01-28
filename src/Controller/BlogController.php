@@ -41,8 +41,9 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog/articles", name="blog_articles")
      */
-    public function listArticles(int $page)
+    public function listArticles(Request $request)
     {
+        dump($request->query->all());
         dd('Prépa');
     }
 

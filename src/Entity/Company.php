@@ -4,12 +4,17 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\GroupSequenceProviderInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
- * @Assert\GroupSequence({"registration", "Company"})
+ * @Assert\GroupSequence({"Company", "registration"})
  */
+
+//
 class Company
+// class Company implements GroupSequenceProviderInterface
 {
     /**
      * @ORM\Id()
@@ -126,19 +131,16 @@ class Company
     }
 
     /**
-     * @Assert\Email(groups={"registration"})
      * @Assert\NotBlank(groups={"registration"}, message = "vvv $email")
      */
     public $email;
 
     /**
      * @Assert\NotBlank(groups={"registration"})
-     * @Assert\Length(min=7, groups={"registration"})
      */
     public $password;
 
     /**
-     * @Assert\Length(min=2)
      * @Assert\NotBlank(message = "vvv $city2")
      */
     public $city2;
@@ -149,9 +151,13 @@ class Company
     public $username;
 
     /**
-     * @Assert\Length(min=2)
-     * @Assert\NotBlank(message = "PAssword not vide")
+     * @Assert\NotBlank(groups={"Company"}, message = "Password not vide")
      */
     public $passwordA;
+
+    public function getGroupSequence(): array
+    {
+        return ['registration', 'Company'];
+    }
 
 }

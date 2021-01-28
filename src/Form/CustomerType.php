@@ -41,12 +41,34 @@ class CustomerType extends AbstractType
         ]);
 
 
+        // TEST CONSTRAINT DEBUT
         $builder->add('foo', TextType::class);
         $builder->add('foo2', TextType::class);
         $builder->add('bar', TextType::class);
         $builder->add('bar2', TextType::class);
+        $builder->add('age', TextType::class);
+        $builder->add('startDate', null,   [
+            'mapped' => false,
+            'html5'  => true,
+            'widget' => 'single_text',
+            ]
+        );
+        $builder->add('endDate', DateTimeType::class,   [
+                'mapped' => false,
+                'html5'  => true,
+                'widget' => 'single_text',
+            ]
+        );
+
+        $builder->add('deliveryDate', DateTimeType::class);
+        $builder->add('description', TextType::class);
 
 
+        $builder->add('category', TextType::class);
+        $builder->add('isTechnicalPost', TextType::class);
+        // TEST CONSTRAINT FIN
+
+        // Test différents FormType
         $builder->add('email', EmailType::class, [
             'mapped' => false,
         ]);

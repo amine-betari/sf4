@@ -50,6 +50,7 @@ class ProcessCm extends Command
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
+        echo $process->getExitCode();
         $output->writeln($process->getOutput());
 
         /////////////////////////////////////////////////
